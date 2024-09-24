@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instructions || Charlie's</title>
+    <style>
+      *{
+        margin: 0;padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #121212;
+      }
+      .instructions-container {
+        color: gold;
+        background-color: #1e1e1e;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        width: auto;
+        border: 2px solid gold;
+        & h1 {
+          font-size: 60px;
+          color: gold;
+          animation: infinite fade 10s ease-in-out;
+        }
+      }
+      @keyframes fade {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      p {
+        font-size: 22px;
+        padding: 20px 0;
+      }
+      ul {
+        font-size: 20px;
+        text-align: left;
+        list-style: square;
+        & li {
+          margin-bottom: 13px;
+          color: red;
+        }
+        & span {
+          color: gold;
+        }
+      }
+      #button-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      button {
+        margin: 10px;
+        background-color: gold;
+        border: none;
+        color: black;
+        cursor: pointer;
+        height: 60px;
+        width: 150px;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+        &:hover {
+          background-color: green;
+          transform: translateY(-2px);
+        }
+        &:active {
+          transform: translateY(0px);
+        }
+        & a {
+          font-size: 20px;
+          font-weight: bold;
+          text-decoration: none;
+          color: #121212;
+        }
+    }
+    #exit-game {
+      background-color: red;
+    }
+    </style>
+  </head>
+  <body>
+    <article class="instructions-container">
+      <h1>Instructions</h1>
+      <p>Welcome to the Quiz App! Follow these instructions to get started:</p>
+      <ul>
+        <li>📝 Answer each question carefully.</li>
+        <li>➡ Click <span>"Next"</span> to move to the next question.</li>
+        <li>📊 Your score will be displayed at the end of the quiz.</li>
+        <li>🏆 To win, aim for a perfect <span>10/10</span> score!</li>
+        <li>🎉 Good luck, and have fun!</li>
+        <li>🔍 Review your answers before submitting.</li>
+        <li>⏱ Take your time; there’s no rush!</li>
+        <li>📚 Expand your knowledge with every question!</li>
+        <li>🌟 Celebrate your achievements and <span>keep learning</span>...!</li>
+      </ul>
+      </ul>
+      <section id="button-container">
+        <button id="start-game">
+          <a href="quiz_interface.html">Start Game</a>
+        </button>
+        <button id="exit-game"><a href="index.html">Exit</a></button>
+      </section>
+    </article>
+  </body>
+</html>

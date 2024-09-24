@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz || Charlie's</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: #121212;
+        & p {
+          padding: 10px;
+          text-transform: capitalize;
+          font-size: 20px;
+        }
+        & h1 {
+          font-size: 50px;
+          color: gold;
+          margin: 20px;
+          margin: 100px 0px 40px 0px;
+        }
+        h3 {
+          color: gold;
+          font-size: 20px;
+        }
+      }
+      .quiz-container,
+      .result-container {
+        color: white;
+        padding: 30px 50px;
+        background-color: #1e1e1e;
+        border-radius: 8px;
+        width: 450px;
+        border: 2px solid gold;
+      }
+      .result-container {
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        & li {
+          padding: 10px;
+          border: 1px solid gold;
+          border-radius: 5px;
+          font-size: 16px;
+          margin: 20px 0px;
+          margin-left: 10px;
+          &:hover {
+            background-color: #464242;
+          }
+          & label {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .actions {
+        gap: 10px;
+        margin-top: 40px;
+        & button {
+          background-color: gold;
+          border: none;
+          color: black;
+          height: 10%;
+          width: 40%;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: bold;
+          padding: 10px;
+          border-radius: 5px;
+        }
+      }
+      button:hover {
+        background-color: yellow;
+        transform: scale(1.03);
+      }
+      #next {
+        float: right;
+      }
+      #prev {
+        &:hover {
+          background-color: darkgray;
+          transform: scale(1.03);
+        }
+        background-color: grey;
+        float: left;
+      }
+      #submit {
+        float: right;
+        display: none;
+      }
+      .result-container {
+        display: none;
+      }
+      .correct {
+        color: lightgreen;
+      }
+      .wrong {
+        color: red;
+      }
+      input[type="radio"]:checked ~ label {
+        color: goldenrod;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Simple Quiz...📝</h1>
+    <div class="quiz-container" id="quiz">
+      <main class="quiz-header">
+        <p id="question">First Question</p>
+        <ul>
+          <li>
+            <input type="radio" name="answer" id="a" class="answer" />
+            <label for="a" class="op_label" id="a_text">op 1</label>
+          </li>
+          <li>
+            <input type="radio" name="answer" id="b" class="answer" />
+            <label for="b" class="op_label" id="b_text">op 2</label>
+          </li>
+          <li>
+            <input type="radio" name="answer" id="c" class="answer" />
+            <label for="c" class="op_label" id="c_text">op 3</label>
+          </li>
+          <li>
+            <input type="radio" name="answer" id="d" class="answer" />
+            <label for="d" class="op_label" id="d_text">op 4</label>
+          </li>
+        </ul>
+        <footer class="actions">
+          <button id="prev">PREV</button>
+          <button id="next">NEXT</button>
+          <button id="submit">SUBMIT</button>
+        </footer>
+      </main>
+    </div>
+    <br />
+    <h3></h3>
+    <br />
+    <div class="result-container" id="result">
+      <h2 id="score"></h2>
+      <ul id="results-list"></ul>
+      <div class="actions" style="display: flex; justify-content: center">
+        <button id="reload" onclick="location.reload()">Reload</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let name = prompt("Enter ur name to play..").toUpperCase();
+      alert(`Hello ${name}..! Welcome to Simple Quiz...`);
+      const quizdata = [
+        {
+          question:
+            "1. Which is heavier: a ton of Bricks or a ton of Feathers..?",
+          a: " A. A ton of Bricks",
+          b: " B. A ton of Feathers",
+          c: " C. They are both the same weight",
+          d: " D. It depends on the type of bricks",
+          correct: "c",
+        },
+        {
+          question:
+            "2. Jimmy's father has three sons- Paul I and Paul II. Can you guess the name of the third son..?",
+          a: " A. Paul III",
+          b: " B. Jimmy",
+          c: " C. Jerin",
+          d: " D. None",
+          correct: "b",
+        },
+        {
+          question: "3. How many months have 28 days..?",
+          a: " A. 2",
+          b: " B. 1",
+          c: " C. All of them",
+          d: " D. Depends if there's a leap year or not",
+          correct: "c",
+        },
+        {
+          question: "4. Why did the math book look sad..?",
+          a: " A. It was torn",
+          b: " B. It was old",
+          c: " C. It was boring",
+          d: " D. It had too many problems",
+          correct: "d",
+        },
+        {
+          question: "5. Which country invented ice cream..?",
+          a: " A. China",
+          b: " B. France",
+          c: " C. Italy",
+          d: " D. USA",
+          correct: "a",
+        },
+        {
+          question: "6. What is the national animal of Scotland..?",
+          a: " A. Horse",
+          b: " B. Bull",
+          c: " C. Unicorn",
+          d: " D. Lion",
+          correct: "c",
+        },
+        {
+          question: "7. Which animal sleeps the most..?",
+          a: " A. Sloth",
+          b: " B. Koala",
+          c: " C. Cat",
+          d: " D. Bat",
+          correct: "b",
+        },
+        {
+          question: "8. what is the meaning of 'Hakuna Matata'..?",
+          a: " A. Good morning",
+          b: " B. Hello",
+          c: " C. Thank you",
+          d: " D. No worries",
+          correct: "d",
+        },
+        {
+          question: "9. Why did the computer go to the doctor..?",
+          a: " A. It was slow",
+          b: " B. It had a virus",
+          c: " C. It was overheating",
+          d: " D. It needed a reboot",
+          correct: "b",
+        },
+        {
+          question: "10. What did one wall say to the other wall..?",
+          a: " A. Meet you at the corner!",
+          b: " B. Stop leaning!",
+          c: " C. You look plastered!",
+          d: " D. We need to talk about our relationship!",
+          correct: "a",
+        },
+      ];
+
+      const quiz = document.getElementById("quiz");
+      const resultEls = document.getElementById("result");
+
+      const answerEls = document.querySelectorAll(".answer");
+      const labelEls = document.querySelectorAll(".op_label");
+      const questionEle = document.getElementById("question");
+      const a_text = document.getElementById("a_text");
+      const b_text = document.getElementById("b_text");
+      const c_text = document.getElementById("c_text");
+      const d_text = document.getElementById("d_text");
+
+      const prevBtn = document.getElementById("prev");
+      const nextBtn = document.getElementById("next");
+      const submitBtn = document.getElementById("submit");
+      const scoreEle = document.getElementById("score");
+      const resultsList = document.getElementById("results-list");
+
+      let currentQtn = 0;
+      let answered = 0;
+      let userSelected = {};
+
+      loadQuiz();
+
+      function loadQuiz() {
+        questionEle.innerText = quizdata[currentQtn].question;
+        a_text.innerText = quizdata[currentQtn].a;
+        b_text.innerText = quizdata[currentQtn].b;
+        c_text.innerText = quizdata[currentQtn].c;
+        d_text.innerText = quizdata[currentQtn].d;
+        deSelectAnswer();
+
+        // to store the user selected answer when the prev is tap
+        if (userSelected[currentQtn]) {
+          let selected = userSelected[currentQtn];
+          document.getElementById(selected).checked = true;
+        }
+
+        //to display submit btn
+        if (currentQtn == quizdata.length - 1) {
+          nextBtn.style.display = "none";
+          submitBtn.style.display = "block";
+        } else if (currentQtn == 0) {
+          prevBtn.style.display = "none";
+        } else {
+          prevBtn.style.display = "block";
+          nextBtn.style.display = "block";
+          submitBtn.style.display = "none";
+        }
+      }
+
+      nextBtn.addEventListener("click", function () {
+        let answer = getSelected();
+        if (answer) {
+          if (answer == quizdata[currentQtn].correct) {
+            answered++;
+          }
+          currentQtn++;
+          if (currentQtn < quizdata.length) {
+            loadQuiz();
+          }
+        } else {
+          alert("Please select ur answer");
+        }
+        console.log(currentQtn);
+      });
+
+      prevBtn.addEventListener("click", function () {
+        if (currentQtn > 0) {
+          currentQtn--;
+          loadQuiz();
+        }
+      });
+
+      submitBtn.addEventListener("click", function () {
+        let answer = getSelected();
+        if (answer) {
+          if (answer == quizdata[currentQtn].correct) {
+            answered++;
+          }
+          quiz.style.display = "none";
+          resultEls.style.display = "block";
+          scoreEle.innerText =
+            answered + "/" + quizdata.length + "Questions answered correctly";
+
+          resultsList.innerHTML = ""; // Clear previous results
+          quizdata.forEach((item, index) => {
+            const li = document.createElement("li");
+            li.innerText = `Q) ${item.question} \n Your answer: ${
+              userSelected[index] ? item[userSelected[index]] : "No answer"
+            }`;
+            if (userSelected[index] === item.correct) {
+              li.classList.add("correct");
+            } else {
+              li.classList.add("wrong");
+            }
+            resultsList.appendChild(li);
+          });
+        } else {
+          alert("Please select ur answer");
+        }
+      });
+
+      // if any option selected then only it move on to the another question
+      function getSelected() {
+        let answer;
+        answerEls.forEach((answerEls) => {
+          if (answerEls.checked) {
+            answer = answerEls.id;
+            userSelected[currentQtn] = answer;
+          }
+        });
+        return answer;
+      }
+
+      //to deselect the options when it move on to the next qtn
+      function deSelectAnswer() {
+        answerEls.forEach((answerEls) => {
+          answerEls.checked = false;
+        });
+      }
+
+      window.onload = function () {
+        let p = document.querySelector("h3");
+        const text = [
+          "Welcome to the Quiz App..❤",
+          "Test your Knowledge..🧠",
+          "challenge your friends!👫",
+          "Let's Play..🥳",
+          "You seem to be genius...🤓",
+          "Can u score 🔟/🔟 ?",
+          "Let's test you..!🤟",
+          "Think Wisely..🧐",
+          "Have Fun..🤩",
+        ];
+        let i = 0;
+        let j = 0;
+        function typeword() {
+          if (i < text.length) {
+            if (j < text[i].length) {
+              p.textContent = text[i].slice(0, j + 1);
+              j++;
+              setTimeout(typeword, 200);
+            } else {
+              i++;
+              j = 0;
+              setTimeout(typeword, 700);
+            }
+          }
+        }
+        typeword();
+      };
+    });
+  </script>
+</html>
