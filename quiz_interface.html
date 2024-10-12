@@ -108,6 +108,27 @@
       input[type="radio"]:checked ~ label {
         color: goldenrod;
       }
+     
+      @media only screen and (max-width: 550px) {
+        .quiz-container,
+        .result-container {
+          width: 70%; 
+        }
+        body h1{
+          font-size: 40px;
+        }
+      }
+      @media only screen and (max-width: 400px) {
+        .quiz-container,
+        .result-container {
+          width: 60%;
+        } 
+        body h1{
+          font-size: 30px;
+        }
+      }
+
+
     </style>
   </head>
   <body>
@@ -175,7 +196,8 @@
           correct: "a",
         },
         {
-          question: "3. ______________ is the processed form of data which is organized meaningful and useful ?",
+          question:
+            "3. ______________ is the processed form of data which is organized meaningful and useful ?",
           a: " A. Information",
           b: " B. Software",
           c: " C. Data",
@@ -183,7 +205,8 @@
           correct: "a",
         },
         {
-          question: "4.	Which disk is made up of a circular thin plastic jacket coated with magnetic material ?",
+          question:
+            "4.	Which disk is made up of a circular thin plastic jacket coated with magnetic material ?",
           a: " A. Hard Disk",
           b: " B. Compact Disk ",
           c: " C. DVD",
@@ -191,7 +214,8 @@
           correct: "d",
         },
         {
-          question: "5. ___________ disks are used to store more than 25 GB of data with a very high speed in less amount of time ?",
+          question:
+            "5. ___________ disks are used to store more than 25 GB of data with a very high speed in less amount of time ?",
           a: " A. Digital Versatile",
           b: " B. Compact",
           c: " C. Blue-Ray ",
@@ -199,7 +223,8 @@
           correct: "c",
         },
         {
-          question: "6. Random Access Memory and Read Only Memory are examples of _______________ ?",
+          question:
+            "6. Random Access Memory and Read Only Memory are examples of _______________ ?",
           a: " A. Primary Memory ",
           b: " B. Secondary Memory ",
           c: " C. Auxiliary Memory ",
@@ -215,7 +240,8 @@
           correct: "b",
         },
         {
-          question: "8.___________ is a cabling technology for transferring data to and from digital devices at high speeds. ?",
+          question:
+            "8.___________ is a cabling technology for transferring data to and from digital devices at high speeds. ?",
           a: " A. S-Video Port ",
           b: " B. FireWire",
           c: " C. Ethernet Port ",
@@ -223,7 +249,8 @@
           correct: "b",
         },
         {
-          question: "9. ___________ acts as the nerve centre that sends control signal to all other units. ?",
+          question:
+            "9. ___________ acts as the nerve centre that sends control signal to all other units. ?",
           a: " A. Control Unit ",
           b: " B. Software",
           c: " C. ALU",
